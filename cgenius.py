@@ -166,18 +166,18 @@ Oriol Garcia Vila | Pol Sedo i Mota
 ╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╝
                                                 NETWORK MULTIMEDIA CODING TOOLS                                                                                                                                                                    
 Usage:
-  programa.py convert <input_file> <output_file>
-  programa.py resize <input_file> <output_file> --width <width> --height <height>
-  programa.py framerate <input_file> <output_file> --framerate <framerate>
-  programa.py quality <input_file> <output_file> --crf <crf>
-  programa.py extract <input_file> <output_file> --start_time <start_time> --duration <duration>
-  programa.py audio <input_file> <output_file>
-  programa.py send <input_file> <remote_IP> <port>
-  programa.py recive <port>
-  programa.py zip <input_file>
-  programa.py unzip <input_file>
-  programa.py delete <input_file>
-  programa.py subtitles <input_file> <output_file>
+  cgenius.py convert <input_file> <output_file>
+  cgenius.py resize <input_file> <output_file> --width <width> --height <height>
+  cgenius.py framerate <input_file> <output_file> --framerate <framerate>
+  cgenius.py quality <input_file> <output_file> --crf <crf>
+  cgenius.py extract <input_file> <output_file> --start_time <start_time> --duration <duration>
+  cgenius.py audio <input_file> <output_file>
+  cgenius.py send <input_file> <remote_IP> <port>
+  cgenius.py recive <port>
+  cgenius.py zip <input_file>
+  cgenius.py unzip <input_file>
+  cgenius.py delete <input_file>
+  cgenius.py subtitles <input_file> <output_file>
 
 
   
