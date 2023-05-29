@@ -135,8 +135,6 @@ def extract_audio(input_file):
 
 USAGE = '''
  
- 
-    
 Oriol Garcia Vila | Pol Sedo i Mota                                                                                                        
 ███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████╗
 ╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╝
@@ -149,6 +147,10 @@ Oriol Garcia Vila | Pol Sedo i Mota
 ███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████╗
 ╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╚════╝
                                                 NETWORK MULTIMEDIA CODING TOOLS                                                                                                                                                                    
+
+    IMPORTANT: You must have ffmpeg.exe & ffprobe.exe on C:/
+        download: https://ffmpeg.org/download.html 
+    
 Usage:
   programa.py convert <input_file> <output_file>
   programa.py resize <input_file> <output_file> --width <width> --height <height>
@@ -163,9 +165,6 @@ Usage:
   programa.py delete <input_file>
   programa.py subtitles <input_file> <output_file>
 
-
-  
-
 Options:
   --width <width>             Width for resizing
   --height <height>           Height for resizing
@@ -173,6 +172,8 @@ Options:
   --crf <crf>                 Constant Rate Factor for quality adjustment
   --start_time <start_time>   Start time for video segment extraction
   --duration <duration>       Duration of video segment extraction
+  
+Source Code:   https://github.com/SuGarcias/CodecGenius 
 '''
 
 def main():
