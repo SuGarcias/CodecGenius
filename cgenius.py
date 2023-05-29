@@ -165,9 +165,6 @@ Usage:
   programa.py delete <input_file>
   programa.py subtitles <input_file> <output_file>
 
-
-  
-
 Options:
   --width <width>             Width for resizing
   --height <height>           Height for resizing
@@ -175,6 +172,8 @@ Options:
   --crf <crf>                 Constant Rate Factor for quality adjustment
   --start_time <start_time>   Start time for video segment extraction
   --duration <duration>       Duration of video segment extraction
+  
+Source Code:   https://github.com/SuGarcias/CodecGenius 
 '''
 
 def main():
