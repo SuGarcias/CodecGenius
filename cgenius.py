@@ -47,7 +47,7 @@ def generate_subtitles(audio_file, output_file):
         audio = recognizer.record(source)
         text = recognizer.recognize_google(audio, show_all=False)
 
-    duration = ffmpeg.probe(audio_file)['format']['duration']
+    duration = ffmpeg.probe(audio_file, cmd='C:/ffprobe.exe')['format']['duration']
     duration = float(duration)
 
     subtitle_text = "1\n00:00:00,000 --> {duration},000\n{text}".format(duration=to_srt_time(duration), text=text)
