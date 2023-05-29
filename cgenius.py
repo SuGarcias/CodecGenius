@@ -126,8 +126,9 @@ def adjust_quality(input_file, output_file, crf):
 def extract_video_segment(input_file, output_file, start_time, duration):
     ffmpeg.input(input_file, ss=start_time, t=duration).output(output_file).run()
 
-def extract_audio(input_file, output_file):
-    ffmpeg.input(input_file).output(output_file, format="wav").run()
+def extract_audio(input_file):
+    base_name = os.path.splitext(input_file)[0]
+    ffmpeg.input(input_file).output(base_name+'.wav', format="wav").run()
 
 
 
@@ -154,7 +155,7 @@ Usage:
   programa.py framerate <input_file> <output_file> --framerate <framerate>
   programa.py quality <input_file> <output_file> --crf <crf>
   programa.py extract <input_file> <output_file> --start_time <start_time> --duration <duration>
-  programa.py audio <input_file> <output_file>
+  programa.py audio <input_file>
   programa.py send <input_file> <remote_IP> <port>
   programa.py recive <port>
   programa.py zip <input_file>
@@ -188,7 +189,7 @@ def main():
     elif args['extract']:
         extract_video_segment(args['<input_file>'], args['<output_file>'], args['--start_time'], args['--duration'])
     elif args['audio']:
-        extract_audio(args['<input_file>'], args['<output_file>'])
+        extract_audio(args['<input_file>'])
     elif args['send']:
         send_file(args['<input_file>'], args['<remote_IP>'], args['<port>'])
     elif args['recive']:
