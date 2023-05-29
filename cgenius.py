@@ -118,6 +118,9 @@ def adjust_quality(input_file, output_file, crf):
 def extract_video_segment(input_file, output_file, start_time, duration):
     ffmpeg.input(input_file, executable=FFMPEG_PATH, ss=start_time, t=duration).output(output_file).run()
 
+def extract_audio(input_file, output_file):
+    ffmpeg.input(input_file, executable=FFMPEG_PATH).output(output_file, format="wav").run()
+
 USAGE = '''
  
  
