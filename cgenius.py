@@ -4,6 +4,7 @@ import os
 import socket
 import shutil
 import speech_recognition as sr
+import pytube
 
 """
 Auxiliar functions 
@@ -142,7 +143,11 @@ def generate_and_embed_subtitles(video_file, output_file):
     os.remove(subtitles_file)
 
 
-
+def descargar_video(link):
+    yt = pytube.YouTube(link)
+    stream = yt.streams.get_highest_resolution()
+    stream.download()
+    print('¡Video descargado exitosamente!')
 
 
 USAGE = '''
@@ -215,6 +220,10 @@ def main():
         delete_file(args['<input_file>'])
     elif args['subtitles']:
         generate_and_embed_subtitles(args['<input_file>'], args['<output_file>'])
+    elif args['descargar']:
+        link = args['<link>']
+        descargar_video(link)
+        
 
 
     
