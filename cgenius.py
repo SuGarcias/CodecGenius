@@ -5,6 +5,9 @@ import socket
 import shutil
 import speech_recognition as sr
 
+"""
+Auxiliar functions 
+"""
 def delete_file(file_path):
     try:
         os.remove(file_path)
@@ -20,47 +23,13 @@ def zip_file(input_file):
     base_name = os.path.splitext(input_file)[0]
     shutil.make_archive(base_name, 'zip', os.path.dirname(input_file), os.path.basename(input_file))
 
-
 def unzip_file(input_file):
     shutil.unpack_archive(input_file)
-#############################################################
-def generate_and_embed_subtitles(video_file, output_file):
-    # Extraer el audio del video
-    audio_file = "temp_audio.wav"
-    ffmpeg.input(video_file).output(audio_file, format="wav").run()
 
-    # Generar los subtítulos
-    subtitles_file = "subtitles.srt"
-    generate_subtitles(audio_file, subtitles_file)
-
-    # Incrustar los subtítulos en el video
-    ffmpeg.input(video_file).output(output_file, vf="subtitles='" + subtitles_file + "'").run()
-
-    # Eliminar los archivos temporales
-    os.remove(audio_file)
-    os.remove(subtitles_file)
-
-def generate_subtitles(audio_file, output_file):
-    recognizer = sr.Recognizer()
-
-    with sr.AudioFile(audio_file) as source:
-        audio = recognizer.record(source)
-        text = recognizer.recognize_google(audio, show_all=False)
-
-    duration = ffmpeg.probe(audio_file, cmd='C:/ffprobe.exe')['format']['duration']
-    duration = float(duration)
-
-    subtitle_text = "1\n00:00:00,000 --> {duration},000\n{text}".format(duration=to_srt_time(duration), text=text)
-
-    with open(output_file, "w") as f:
-        f.write(subtitle_text)
-
-def to_srt_time(seconds):
-    milliseconds = int((seconds - int(seconds)) * 1000)
-    m, s = divmod(int(seconds), 60)
-    h, m = divmod(m, 60)
-    return "{:02d}:{:02d}:{:02d},{:03d}".format(h, m, s, milliseconds)
-####################################################################
+"""
+Network:
+    Socket connection 
+"""
 def send_file(input_file, remote_IP, port):
     port = int(port)
     base_name = os.path.splitext(input_file)[0]
@@ -111,6 +80,9 @@ def recive_file(port):
     delete_file('archivo_socket.zip')
 
 
+"""
+Multimedia Coding Tools
+"""
 def convert_video(input_file, output_file):
     ffmpeg.input(input_file).output(output_file).run()
 
@@ -129,6 +101,46 @@ def extract_video_segment(input_file, output_file, start_time, duration):
 def extract_audio(input_file):
     base_name = os.path.splitext(input_file)[0]
     ffmpeg.input(input_file).output(base_name+'.wav', format="wav").run()
+
+# Subtitles 
+def to_srt_time(seconds):
+    milliseconds = int((seconds - int(seconds)) * 1000)
+    m, s = divmod(int(seconds), 60)
+    h, m = divmod(m, 60)
+    return "{:02d}:{:02d}:{:02d},{:03d}".format(h, m, s, milliseconds)
+
+def generate_subtitles(audio_file, output_file):
+    recognizer = sr.Recognizer()
+    FFPROBE_PATH = 'C:/ffprobe.exe' 
+
+    with sr.AudioFile(audio_file) as source:
+        audio = recognizer.record(source)
+        text = recognizer.recognize_google(audio, show_all=False)
+
+    duration = ffmpeg.probe(audio_file, cmd=FFPROBE_PATH)['format']['duration']  
+    duration = float(duration)
+
+    subtitle_text = "1\n00:00:00,000 --> {duration},000\n{text}".format(duration=to_srt_time(duration), text=text)
+
+    with open(output_file, "w") as f:
+        f.write(subtitle_text)
+
+def generate_and_embed_subtitles(video_file, output_file):
+    # Extraer el audio del video
+    audio_file = "temp_audio.wav"
+    ffmpeg.input(video_file).output(audio_file, format="wav").run()
+
+    # Generar los subtítulos
+    subtitles_file = "subtitles.srt"
+    generate_subtitles(audio_file, subtitles_file)
+
+    # Incrustar los subtítulos en el video
+    ffmpeg.input(video_file).output(output_file, vf="subtitles='" + subtitles_file + "'").run()
+
+    # Eliminar los archivos temporales
+    os.remove(audio_file)
+    os.remove(subtitles_file)
+
 
 
 
